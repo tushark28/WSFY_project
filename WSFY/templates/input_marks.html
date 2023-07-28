@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Marks</title>
+</head>
+<body>
+    <h1>Input Marks</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="student">Student:</label>
+        <select name="student" required>
+            {% for student in students %}
+                <option value="{{ student.id }}">{{ student.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="subject">Subject:</label>
+        <select name="subject" required>
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="teacher">Teacher:</label>
+        <select name="teacher" required>
+            {% for teacher in teachers %}
+                <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="marks">Marks:</label>
+        <input type="number" name="marks" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

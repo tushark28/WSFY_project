@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Marks</title>
+</head>
+<body>
+    <h1>View Marks for {{ student.name }}</h1>
+    <ul>
+        {% for mark in marks %}
+            <li>{{ mark.subject.name }} - {{ mark.marks_obtained }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
