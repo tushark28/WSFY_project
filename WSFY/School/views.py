@@ -5,14 +5,31 @@ from .models import Student, Marks, Subject, Teacher
 
 def input_marks(request):
     if request.method == 'POST':
-        student_id = request.POST.get('student')
-        subject_id = request.POST.get('subject')
-        teacher_id = request.POST.get('teacher')
+        student_req = request.POST.get('student')
+        roll_no = request.POST.get('RollNo')
+        subject_req = request.POST.get('subject')
+        teacher_req = request.POST.get('teacher')
         marks_obtained = request.POST.get('marks')
 
-        student = Student.objects.get(pk=student_id)
-        subject = Subject.objects.get(pk=subject_id)
-        teacher = Teacher.objects.get(pk=teacher_id)
+        if(Student.objects.filter(roll_number=roll_no).exists()):
+            student = Student.objects.get(roll_number=roll_no)
+        else:
+            Student.objects.create(name=student_req,roll_number=roll_no)
+            student = Student.objects.get(roll_number=roll_no)
+
+        if(Subject.objects.filter(sub_name=subject_req).exists()):
+            subject = Subject.objects.get(sub_name=subject_req)       
+        else:
+            Subject.objects.create(sub_name=subject_req)
+            subject = Subject.objects.get(sub_name=subject_req)
+
+        if(Teacher.objects.filter(name=teacher_req).exists()):
+            teacher = Teacher.objects.get(name=teacher_req)       
+        else:
+            Teacher.objects.create(name=teacher_req)
+            teacher = Teacher.objects.get(name=teacher_req)
+            teacher.subjects.add(subject)
+        
 
         Marks.objects.create(
             student=student,
@@ -21,16 +38,12 @@ def input_marks(request):
             marks_obtained=marks_obtained
         )
 
-    students = Student.objects.all()
-    subjects = Subject.objects.all()
-    teachers = Teacher.objects.all()
-
-    return render(request, 'input_marks.html', {'students': students, 'subjects': subjects, 'teachers': teachers})
+    return render(request, 'input_marks.html')
 
 def view_marks(request):
     if request.method == 'POST':
         student_id = request.POST.get('student')
-        student = Student.objects.get(pk=student_id)
+        student = Student.objects.get(roll_number = student_id)
         marks = Marks.objects.filter(student=student)
 
         return render(request, 'view_marks.html', {'student': student, 'marks': marks})

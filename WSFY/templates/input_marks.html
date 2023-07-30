@@ -8,25 +8,15 @@
     <form method="post">
         {% csrf_token %}
         <label for="student">Student:</label>
-        <select name="student" required>
-            {% for student in students %}
-                <option value="{{ student.id }}">{{ student.name }}</option>
-            {% endfor %}
-        </select>
+        <input type="text" name="student" required>
+        <label for="RollNo">Roll Number: </label>
+        <input type="number" name="RollNo" required>
         <br>
         <label for="subject">Subject:</label>
-        <select name="subject" required>
-            {% for subject in subjects %}
-                <option value="{{ subject.id }}">{{ subject.name }}</option>
-            {% endfor %}
-        </select>
+        <input type="text" name="subject" required>
         <br>
         <label for="teacher">Teacher:</label>
-        <select name="teacher" required>
-            {% for teacher in teachers %}
-                <option value="{{ teacher.id }}">{{ teacher.name }}</option>
-            {% endfor %}
-        </select>
+        <input type="text" name="teacher" required>
         <br>
         <label for="marks">Marks:</label>
         <input type="number" name="marks" required>

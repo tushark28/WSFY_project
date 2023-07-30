@@ -4,10 +4,10 @@
     <title>View Marks</title>
 </head>
 <body>
-    <h1>View Marks for {{ student.name }}</h1>
+    <h1>View Marks for {{ student.name }}, Roll Number = {{student.roll_number}}</h1>
     <ul>
         {% for mark in marks %}
-            <li>{{ mark.subject.name }} - {{ mark.marks_obtained }}</li>
+            <li>{{ mark.subject.sub_name }} - {{ mark.marks_obtained }}</li>
         {% endfor %}
     </ul>
 </body>
